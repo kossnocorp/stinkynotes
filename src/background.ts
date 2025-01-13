@@ -5,18 +5,25 @@ chrome.action.onClicked.addListener(async (tab) => {
 });
 
 chrome.runtime.onMessage.addListener((message, sender) => {
-  if (message.type === "UPDATE_ICON" && sender.tab && sender.tab.id) {
-    const { hasNote } = message.payload;
-    const pathPrefix = hasNote ? "icons/icon-yellow" : "icons/icon-gray";
-
+  if (message.type === "SET_ICON" && sender.tab && sender.tab.id != null) {
+    const tabId = sender.tab.id;
+    const { icon } = message.payload;
     chrome.action.setIcon({
-      tabId: sender.tab.id,
-      path: {
-        "16": `${pathPrefix}-16.png`,
-        "32": `${pathPrefix}-32.png`,
-        "48": `${pathPrefix}-48.png`,
-        "128": `${pathPrefix}-128.png`,
-      },
+      tabId,
+      path: iconSizesPath(icon),
     });
   }
 });
+
+function iconSizesPath(icon: string) {
+  return {
+    "16": iconPath(icon, 16),
+    "32": iconPath(icon, 32),
+    "48": iconPath(icon, 48),
+    "128": iconPath(icon, 128),
+  };
+}
+
+function iconPath(icon: string, size: number) {
+  return `icons/${icon}-${size}.png`;
+}
