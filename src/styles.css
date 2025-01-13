@@ -1,0 +1,11 @@
+.stinky-note {
+  @apply fixed top-4 right-4 w-64 h-64 z-[999999];
+}
+
+.stinky-note-close {
+  @apply absolute top-1 right-1 text-gray-600 hover:text-gray-900 text-xs p-1 font-bold border-none bg-transparent z-[999999];
+}
+
+.stinky-note-textarea {
+  @apply p-2 resize-none w-full h-full bg-yellow-200 outline-none rounded-sm border-none shadow-lg z-[999999];
+}
