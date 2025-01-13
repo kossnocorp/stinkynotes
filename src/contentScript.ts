@@ -18,6 +18,8 @@ function createStickyNote() {
     e.stopImmediatePropagation();
   };
 
+  interceptEvents(stickyContainer);
+
   closeButton = document.createElement("button");
   closeButton.className = "stinky-note-close";
   closeButton.innerText = "✕";
@@ -101,3 +103,29 @@ window.addEventListener("load", async () => {
   createStickyNote();
   await checkForNote();
 });
+
+const eventsToIntercept = [
+  "focus",
+  "focusin",
+  "focusout",
+  "blur",
+  "mousedown",
+  "mouseup",
+  "click",
+  "touchstart",
+  "touchend",
+  "pointerdown",
+  "pointerup",
+];
+
+function interceptEvents(container: HTMLElement) {
+  eventsToIntercept.forEach((name) => {
+    document.addEventListener(
+      name,
+      (e) => {
+        if (container.contains(e.target as Node)) e.stopImmediatePropagation();
+      },
+      true
+    );
+  });
+}
