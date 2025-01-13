@@ -2,10 +2,6 @@
   "name": "stinkynotes",
   "version": "1.0.0",
   "description": "A sticky notes browser extension",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build"
-  },
   "devDependencies": {
     "@types/chrome": "^0.0.293",
     "autoprefixer": "^10.4.20",
